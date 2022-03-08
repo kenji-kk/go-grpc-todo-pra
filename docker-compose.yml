@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+  server:
+    build: .
+    ports:
+      - "50051:50051"
+    container_name: server
+    command: bash -c "go run server/server.go"
+    depends_on:
+      - mongo
+    volumes:
+    - ./api:/app/api
+
+  client:
+    build: .
+    container_name: client
+    depends_on:
+      - server
+    volumes:
+      - ./api:/app/api
+
+  mongo:
+    image: mongo
+    container_name: mongo

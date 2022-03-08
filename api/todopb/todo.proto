@@ -1,0 +1,56 @@
+syntax = "proto3";
+package api;
+option go_package = "./api/todopb";
+ 
+message Todo {
+    string id = 1;
+    string author_id = 2;
+    string title = 3;
+    string content = 4;
+}
+ 
+message CreateTodoRequest {
+    Todo todo = 1;
+}
+ 
+message CreateTodoResponse {
+    Todo todo = 1;
+}
+ 
+message ReadTodoRequest {
+    string todo_id = 1;
+}
+ 
+message ReadTodoResponse {
+    Todo todo = 1;
+}
+ 
+message UpdateTodoRequest {
+    Todo todo = 1;
+}
+ 
+message UpdateTodoResponse {
+    Todo todo = 1;
+}
+ 
+message DeleteTodoRequest {
+    string todo_id = 1;
+}
+
+message DeleteTodoResponse {
+    string todo_id = 1;
+}
+
+message ListTodoRequest {}
+ 
+message ListTodoResponse {
+    Todo todo = 1;
+}
+ 
+service TodoService {
+    rpc CreateTodo(CreateTodoRequest) returns (CreateTodoResponse) {}
+    rpc ReadTodo(ReadTodoRequest) returns (ReadTodoResponse) {}
+    rpc UpdateTodo(UpdateTodoRequest) returns (UpdateTodoResponse) {}
+    rpc DeleteTodo(DeleteTodoRequest) returns (DeleteTodoResponse) {}
+    rpc ListTodo(ListTodoRequest) returns (stream ListTodoResponse) {}
+}
